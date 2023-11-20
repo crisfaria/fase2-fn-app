@@ -1,22 +1,41 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
 const LoginScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>Tela de Login</Text>
-      <StatusBar style="auto" />
+    <View
+      style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        backgroundColor: "#ffeba3",
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: "#cceb9d",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          padding: 30,
+          paddingLeft: 15,
+          paddingRight: 15,
+        }}
+      >
+        <View>
+          <Text>abacaxi</Text>
+        </View>
+        <View>
+          <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
+            MEU HEADER LINDÃO
+          </Text>
+        </View>
+      </View>
+      <View style={{ flexGrow: 1, padding: 15 }}>
+        <Text>Tela de Login</Text>
+      </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFEBA3",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default LoginScreen;

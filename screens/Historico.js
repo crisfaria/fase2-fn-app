@@ -1,38 +1,70 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { View, Text } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
 
 const HistoricoScreen = () => {
   const [selected, setSelected] = useState("");
   return (
-    <ScrollView style={styles.container}>
-      <View>
+    <View
+      style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        backgroundColor: "#ffeba3",
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: "#cceb9d",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          padding: 30,
+          paddingLeft: 15,
+          paddingRight: 15,
+        }}
+      >
+        <View>
+          <Text>abacaxi</Text>
+        </View>
+        <View>
+          <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
+            HISTÓRICO
+          </Text>
+        </View>
+      </View>
+      <View
+        style={{
+          flexGrow: 1,
+          padding: 15,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "start",
+        }}
+      >
         <Calendar
-          style={{ marginBottom: 96, backgroundColor: "#FFEBA3" }}
+          style={{ backgroundColor: "#ffeba3" }}
           onDayPress={(day) => {
             setSelected(day.dateString);
             title = "Estatisticas";
+          }}
+          theme={{
+            calendarBackground: "#ffeba3",
           }}
           markedDates={{
             [selected]: {
               selected: true,
               disableTouchEvent: true,
               selectedDotColor: "#CCEB9D",
+              selectedColor: "#CCEB9D",
+              selectedTextColor: "#10482f",
             },
           }}
         />
       </View>
-    </ScrollView>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFEBA3",
-    //alignItems: "center",
-    //justifyContent: "center",
-  },
-});
 
 export default HistoricoScreen;

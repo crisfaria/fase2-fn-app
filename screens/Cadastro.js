@@ -1,8 +1,6 @@
 import {
-  Button,
   Pressable,
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
@@ -11,49 +9,151 @@ import {
 
 const CadastroScreen = () => {
   return (
-    <ScrollView style={styles.container}>
-      <View>
-        <Pressable>
-          <Text>Nome Completo:</Text>
-          <TextInput
-            placeholder="Digite seu nome completo aqui"
-            keyboardType="default"
-          ></TextInput>
-
-          <Text>Seu endereço de Email:</Text>
-          <TextInput
-            placeholder="Seu email"
-            keyboardType="email-adress"
-          ></TextInput>
-
-          <Text>Escolha uma Senha</Text>
-          <TextInput
-            placeholder="Senha, apenas números"
-            keyboardType="numeric"
-          ></TextInput>
-
-          <Text>Confirme sua Senha</Text>
-          <TextInput
-            placeholder="Confirme sua Senha, apenas números"
-            keyboardType="numeric"
-          ></TextInput>
-
-          <TouchableOpacity>
-            <Button title="Enviar">Enviar</Button>
-          </TouchableOpacity>
-        </Pressable>
+    <View
+      style={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        backgroundColor: "#ffeba3",
+      }}
+    >
+      <View
+        style={{
+          backgroundColor: "#cceb9d",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          padding: 30,
+          paddingLeft: 15,
+          paddingRight: 15,
+        }}
+      >
+        <View>
+          <Text>abacaxi</Text>
+        </View>
+        <View>
+          <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
+            CADASTRO
+          </Text>
+        </View>
       </View>
-    </ScrollView>
+      <ScrollView>
+        <View style={{ padding: 15 }}>
+          <Pressable>
+            <Text
+              style={{
+                marginTop: 15,
+                fontSize: 18,
+                marginLeft: 12,
+                color: "#10482f",
+              }}
+            >
+              Nome Completo:
+            </Text>
+            <TextInput
+              placeholder="Digite seu nome completo aqui"
+              keyboardType="default"
+              style={{
+                backgroundColor: "#ffffff",
+                padding: 12,
+                marginTop: 12,
+                marginBottom: 12,
+
+                borderRadius: 15,
+              }}
+            ></TextInput>
+
+            <Text
+              style={{
+                marginTop: 15,
+                fontSize: 18,
+                marginLeft: 12,
+                color: "#10482f",
+              }}
+            >
+              Seu endereço de Email:
+            </Text>
+            <TextInput
+              placeholder="Seu email"
+              keyboardType="email-adress"
+              style={{
+                backgroundColor: "#ffffff",
+                padding: 12,
+                marginTop: 12,
+                marginBottom: 12,
+                borderRadius: 15,
+              }}
+            ></TextInput>
+
+            <Text
+              style={{
+                marginTop: 15,
+                fontSize: 18,
+                marginLeft: 12,
+                color: "#10482f",
+              }}
+            >
+              Escolha uma Senha
+            </Text>
+            <TextInput
+              placeholder="Senha, apenas números"
+              keyboardType="numeric"
+              style={{
+                backgroundColor: "#ffffff",
+                padding: 12,
+                marginTop: 12,
+                marginBottom: 12,
+                borderRadius: 15,
+              }}
+            ></TextInput>
+
+            <Text
+              style={{
+                marginTop: 15,
+                fontSize: 18,
+                marginLeft: 12,
+                color: "#10482f",
+              }}
+            >
+              Confirme sua Senha
+            </Text>
+            <TextInput
+              placeholder="Confirme sua Senha, apenas números"
+              keyboardType="numeric"
+              style={{
+                backgroundColor: "#ffffff",
+                padding: 12,
+                marginTop: 12,
+                marginBottom: 12,
+                borderRadius: 15,
+              }}
+            ></TextInput>
+
+            <TouchableOpacity>
+              <Pressable
+                style={{
+                  backgroundColor: "#FFD14F",
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  padding: 12,
+                  marginTop: 12,
+                  marginBottom: 12,
+                  marginLeft: 72,
+                  marginRight: 72,
+                  borderRadius: 15,
+                }}
+                title="Enviar"
+              >
+                <Text>Enviar</Text>
+              </Pressable>
+            </TouchableOpacity>
+          </Pressable>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFEBA3",
-    //alignItems: "center",
-    //justifyContent: "center",
-  },
-});
 
 export default CadastroScreen;

@@ -8,7 +8,7 @@ import {
   Image,
 } from "react-native";
 
-const RegistroScreen = () => {
+const RegistroScreen = ({ navigation }) => {
   return (
     <>
       <View
@@ -281,6 +281,32 @@ const RegistroScreen = () => {
                 style={{ width: 36, height: 36 }}
               />
             </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              marginTop: 30,
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Pressable onPress={() => navigation.navigate("Home")}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "#10482f",
+                  fontSize: 15,
+                  backgroundColor: "#FFD14F",
+                  padding: 15,
+                  width: "80%",
+                  borderRadius: 15,
+                }}
+              >
+                Voltar para a Página Inicial
+              </Text>
+            </Pressable>
           </View>
         </ScrollView>
       </View>

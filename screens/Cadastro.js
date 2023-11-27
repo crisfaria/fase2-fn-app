@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 
-const CadastroScreen = () => {
+const CadastroScreen = ({ navigation }) => {
   return (
     <View
       style={{
@@ -154,6 +154,15 @@ const CadastroScreen = () => {
               </Pressable>
             </TouchableOpacity>
           </Pressable>
+          <View style={{ marginTop: 30 }}>
+            <Pressable onPress={() => navigation.navigate("Login")}>
+              <Text
+                style={{ textAlign: "center", color: "#10482f", fontSize: 15 }}
+              >
+                Já tenho conta, quero fazer login!
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </ScrollView>
     </View>

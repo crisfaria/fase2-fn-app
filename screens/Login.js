@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   return (
     <View
       style={{
@@ -111,6 +111,15 @@ const LoginScreen = () => {
               <Text>Entrar</Text>
             </Pressable>
           </TouchableOpacity>
+          <View style={{ marginTop: 30 }}>
+            <Pressable onPress={() => navigation.navigate("Cadastro")}>
+              <Text
+                style={{ textAlign: "center", color: "#10482f", fontSize: 15 }}
+              >
+                Ainda não tenho conta, quero me cadastrar!
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </ScrollView>
     </View>

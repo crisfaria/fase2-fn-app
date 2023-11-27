@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const LoginScreen = ({ navigation }) => {
+const RegistroAlimentosScreen = ({ navigation }) => {
   return (
     <View
       style={{
@@ -40,7 +40,7 @@ const LoginScreen = ({ navigation }) => {
         </View>
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
-            LOGIN
+            REGISTRO DE ALIMENTOS
           </Text>
         </View>
       </View>
@@ -54,12 +54,12 @@ const LoginScreen = ({ navigation }) => {
               color: "#10482f",
             }}
           >
-            Email:
+            Nome do Alimento:
           </Text>
           <Pressable>
             <TextInput
-              placeholder="Digite seu Email aqui"
-              keyboardType="email-address"
+              placeholder="Escreva o nome do alimento"
+              keyboardType="default"
               style={{
                 backgroundColor: "#ffffff",
                 padding: 12,
@@ -78,11 +78,11 @@ const LoginScreen = ({ navigation }) => {
               color: "#10482f",
             }}
           >
-            Senha:
+            Quantidade:
           </Text>
           <Pressable>
             <TextInput
-              placeholder="Digite sua Senha aqui"
+              placeholder="Ex: 200g"
               keyboardType="numeric"
               style={{
                 backgroundColor: "#ffffff",
@@ -94,39 +94,39 @@ const LoginScreen = ({ navigation }) => {
               }}
             ></TextInput>
           </Pressable>
-          <TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("Home")}
-              style={{
-                backgroundColor: "#FFD14F",
-                flex: 1,
-                flexDirection: "row",
-                justifyContent: "center",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
-                marginLeft: 72,
-                marginRight: 72,
-                borderRadius: 15,
-              }}
-              title="Entrar"
-            >
-              <Text>Entrar</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Registro")}
+            style={{
+              backgroundColor: "#FFD14F",
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "center",
+              padding: 12,
+              marginTop: 12,
+              marginBottom: 12,
+              marginLeft: 72,
+              marginRight: 72,
+              borderRadius: 15,
+            }}
+            title="Entrar"
+          >
+            <Pressable>
+              <Text>Salvar</Text>
+            </Pressable>
           </TouchableOpacity>
-          <View style={{ marginTop: 30 }}>
-            <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
+          {/* <View style={{ marginTop: 30 }}>
+            <Pressable onPress={() => navigation.navigate("Cadastro")}>
               <Text
                 style={{ textAlign: "center", color: "#10482f", fontSize: 15 }}
               >
                 Ainda não tenho conta, quero me cadastrar!
               </Text>
-            </TouchableOpacity>
-          </View>
+            </Pressable>
+          </View> */}
         </View>
       </ScrollView>
     </View>
   );
 };
 
-export default LoginScreen;
+export default RegistroAlimentosScreen;

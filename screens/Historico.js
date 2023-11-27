@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
 
@@ -26,7 +26,10 @@ const HistoricoScreen = () => {
         }}
       >
         <View>
-          <Text>abacaxi</Text>
+          <Image
+            source={require("../assets/abacaxi.png")}
+            style={{ width: 27, height: 51 }}
+          />
         </View>
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>

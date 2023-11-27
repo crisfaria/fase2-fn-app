@@ -1,4 +1,5 @@
 import {
+  Image,
   Pressable,
   ScrollView,
   Text,
@@ -30,7 +31,10 @@ const CadastroScreen = () => {
         }}
       >
         <View>
-          <Text>abacaxi</Text>
+          <Image
+            source={require("../assets/abacaxi.png")}
+            style={{ width: 27, height: 51 }}
+          />
         </View>
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>

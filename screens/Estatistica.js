@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, View, Image } from "react-native";
 
 const EstatisticaScreen = () => {
   return (
@@ -23,7 +23,10 @@ const EstatisticaScreen = () => {
         }}
       >
         <View>
-          <Text>abacaxi</Text>
+          <Image
+            source={require("../assets/abacaxi.png")}
+            style={{ width: 27, height: 51 }}
+          />
         </View>
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>

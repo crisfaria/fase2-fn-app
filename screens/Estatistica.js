@@ -1,6 +1,6 @@
 import { ScrollView, Text, View, Image } from "react-native";
 
-const EstatisticaScreen = () => {
+const EstatisticaScreen = ({ navigation }) => {
   return (
     <View
       style={{

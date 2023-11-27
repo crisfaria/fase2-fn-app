@@ -46,17 +46,17 @@ const CadastroScreen = ({ navigation }) => {
       </View>
       <ScrollView>
         <View style={{ padding: 15 }}>
+          <Text
+            style={{
+              marginTop: 15,
+              fontSize: 18,
+              marginLeft: 12,
+              color: "#10482f",
+            }}
+          >
+            Nome Completo:
+          </Text>
           <Pressable>
-            <Text
-              style={{
-                marginTop: 15,
-                fontSize: 18,
-                marginLeft: 12,
-                color: "#10482f",
-              }}
-            >
-              Nome Completo:
-            </Text>
             <TextInput
               placeholder="Digite seu nome completo aqui"
               keyboardType="default"
@@ -69,20 +69,21 @@ const CadastroScreen = ({ navigation }) => {
                 borderRadius: 15,
               }}
             ></TextInput>
-
-            <Text
-              style={{
-                marginTop: 15,
-                fontSize: 18,
-                marginLeft: 12,
-                color: "#10482f",
-              }}
-            >
-              Seu endereço de Email:
-            </Text>
+          </Pressable>
+          <Text
+            style={{
+              marginTop: 15,
+              fontSize: 18,
+              marginLeft: 12,
+              color: "#10482f",
+            }}
+          >
+            Seu endereço de Email:
+          </Text>
+          <Pressable>
             <TextInput
               placeholder="Seu email"
-              keyboardType="email-adress"
+              keyboardType="email-address"
               style={{
                 backgroundColor: "#ffffff",
                 padding: 12,
@@ -91,17 +92,18 @@ const CadastroScreen = ({ navigation }) => {
                 borderRadius: 15,
               }}
             ></TextInput>
-
-            <Text
-              style={{
-                marginTop: 15,
-                fontSize: 18,
-                marginLeft: 12,
-                color: "#10482f",
-              }}
-            >
-              Escolha uma Senha
-            </Text>
+          </Pressable>
+          <Text
+            style={{
+              marginTop: 15,
+              fontSize: 18,
+              marginLeft: 12,
+              color: "#10482f",
+            }}
+          >
+            Escolha uma Senha
+          </Text>
+          <Pressable>
             <TextInput
               placeholder="Senha, apenas números"
               keyboardType="numeric"
@@ -113,17 +115,18 @@ const CadastroScreen = ({ navigation }) => {
                 borderRadius: 15,
               }}
             ></TextInput>
-
-            <Text
-              style={{
-                marginTop: 15,
-                fontSize: 18,
-                marginLeft: 12,
-                color: "#10482f",
-              }}
-            >
-              Confirme sua Senha
-            </Text>
+          </Pressable>
+          <Text
+            style={{
+              marginTop: 15,
+              fontSize: 18,
+              marginLeft: 12,
+              color: "#10482f",
+            }}
+          >
+            Confirme sua Senha
+          </Text>
+          <Pressable>
             <TextInput
               placeholder="Confirme sua Senha, apenas números"
               keyboardType="numeric"
@@ -135,27 +138,26 @@ const CadastroScreen = ({ navigation }) => {
                 borderRadius: 15,
               }}
             ></TextInput>
-
-            <TouchableOpacity>
-              <Pressable
-                style={{
-                  backgroundColor: "#FFD14F",
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  padding: 12,
-                  marginTop: 12,
-                  marginBottom: 12,
-                  marginLeft: 72,
-                  marginRight: 72,
-                  borderRadius: 15,
-                }}
-                title="Enviar"
-              >
-                <Text>Enviar</Text>
-              </Pressable>
-            </TouchableOpacity>
           </Pressable>
+          <TouchableOpacity>
+            <Pressable
+              style={{
+                backgroundColor: "#FFD14F",
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "center",
+                padding: 12,
+                marginTop: 12,
+                marginBottom: 12,
+                marginLeft: 72,
+                marginRight: 72,
+                borderRadius: 15,
+              }}
+              title="Enviar"
+            >
+              <Text>Enviar</Text>
+            </Pressable>
+          </TouchableOpacity>
           <View style={{ marginTop: 30 }}>
             <Pressable onPress={() => navigation.navigate("Login")}>
               <Text

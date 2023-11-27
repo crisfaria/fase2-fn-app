@@ -46,20 +46,20 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <ScrollView>
         <View style={{ padding: 15 }}>
+          <Text
+            style={{
+              marginTop: 15,
+              fontSize: 18,
+              marginLeft: 12,
+              color: "#10482f",
+            }}
+          >
+            Email:
+          </Text>
           <Pressable>
-            <Text
-              style={{
-                marginTop: 15,
-                fontSize: 18,
-                marginLeft: 12,
-                color: "#10482f",
-              }}
-            >
-              Email:
-            </Text>
             <TextInput
               placeholder="Digite seu Email aqui"
-              keyboardType="default"
+              keyboardType="email-address"
               style={{
                 backgroundColor: "#ffffff",
                 padding: 12,
@@ -70,20 +70,20 @@ const LoginScreen = ({ navigation }) => {
               }}
             ></TextInput>
           </Pressable>
+          <Text
+            style={{
+              marginTop: 15,
+              fontSize: 18,
+              marginLeft: 12,
+              color: "#10482f",
+            }}
+          >
+            Senha:
+          </Text>
           <Pressable>
-            <Text
-              style={{
-                marginTop: 15,
-                fontSize: 18,
-                marginLeft: 12,
-                color: "#10482f",
-              }}
-            >
-              Senha:
-            </Text>
             <TextInput
               placeholder="Digite sua Senha aqui"
-              keyboardType="default"
+              keyboardType="numeric"
               style={{
                 backgroundColor: "#ffffff",
                 padding: 12,

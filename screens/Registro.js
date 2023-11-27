@@ -32,7 +32,7 @@ const RegistroScreen = ({ navigation }) => {
           }}
         >
           <View>
-            <Pressable title="Voltar">
+            <Pressable onPress={() => navigation.goBack()}>
               <Image
                 source={require("../assets/abacaxi.png")}
                 style={{ width: 27, height: 51 }}

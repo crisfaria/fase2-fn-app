@@ -60,10 +60,12 @@ const HomeScreen = ({ navigation }) => {
         }}
       >
         <View>
-          <Image
-            source={require("../assets/abacaxi.png")}
-            style={{ width: 27, height: 51 }}
-          />
+          <Pressable onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../assets/abacaxi.png")}
+              style={{ width: 27, height: 51 }}
+            />
+          </Pressable>
         </View>
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>

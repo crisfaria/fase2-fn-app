@@ -60,16 +60,16 @@ const HomeScreen = ({ navigation }) => {
         }}
       >
         <View>
-          <Pressable onPress={() => navigation.goBack()}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Image
               source={require("../assets/abacaxi.png")}
               style={{ width: 27, height: 51 }}
             />
-          </Pressable>
+          </TouchableOpacity>
         </View>
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
-            Página Inicial
+            PÁGINA INICIAL
           </Text>
         </View>
       </View>

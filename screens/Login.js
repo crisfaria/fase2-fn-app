@@ -95,7 +95,8 @@ const LoginScreen = ({ navigation }) => {
             ></TextInput>
           </Pressable>
           <TouchableOpacity>
-            <Pressable
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Home")}
               style={{
                 backgroundColor: "#FFD14F",
                 flex: 1,
@@ -111,16 +112,16 @@ const LoginScreen = ({ navigation }) => {
               title="Entrar"
             >
               <Text>Entrar</Text>
-            </Pressable>
+            </TouchableOpacity>
           </TouchableOpacity>
           <View style={{ marginTop: 30 }}>
-            <Pressable onPress={() => navigation.navigate("Cadastro")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>
               <Text
                 style={{ textAlign: "center", color: "#10482f", fontSize: 15 }}
               >
                 Ainda não tenho conta, quero me cadastrar!
               </Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

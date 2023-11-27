@@ -41,7 +41,7 @@ const RegistroScreen = ({ navigation }) => {
           </View>
           <View>
             <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
-              REGISTRO DE ALIMENTOS
+              REGISTRO DE REFEIÇÕES
             </Text>
           </View>
         </View>
@@ -81,6 +81,7 @@ const RegistroScreen = ({ navigation }) => {
             }}
           >
             <TouchableOpacity
+              onPress={() => navigation.navigate("RegistroAlimentos")}
               style={{
                 backgroundColor: "#FFD14F",
                 padding: 12,
@@ -136,6 +137,7 @@ const RegistroScreen = ({ navigation }) => {
             }}
           >
             <TouchableOpacity
+              onPress={() => navigation.navigate("RegistroAlimentos")}
               style={{
                 backgroundColor: "#FFD14F",
 
@@ -192,6 +194,7 @@ const RegistroScreen = ({ navigation }) => {
             }}
           >
             <TouchableOpacity
+              onPress={() => navigation.navigate("RegistroAlimentos")}
               style={{
                 backgroundColor: "#FFD14F",
 
@@ -248,6 +251,7 @@ const RegistroScreen = ({ navigation }) => {
             }}
           >
             <TouchableOpacity
+              onPress={() => navigation.navigate("RegistroAlimentos")}
               style={{
                 backgroundColor: "#FFD14F",
 
@@ -292,7 +296,7 @@ const RegistroScreen = ({ navigation }) => {
               alignItems: "center",
             }}
           >
-            <Pressable onPress={() => navigation.navigate("Home")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Home")}>
               <Text
                 style={{
                   textAlign: "center",
@@ -306,7 +310,23 @@ const RegistroScreen = ({ navigation }) => {
               >
                 Voltar para a Página Inicial
               </Text>
-            </Pressable>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("Historico")}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "#10482f",
+                  fontSize: 15,
+                  marginTop: 12,
+                  backgroundColor: "#FFD14F",
+                  padding: 15,
+                  width: "80%",
+                  borderRadius: 15,
+                }}
+              >
+                Ir para a Página do Histórico
+              </Text>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>

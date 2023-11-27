@@ -1,8 +1,8 @@
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
 
-const HistoricoScreen = () => {
+const HistoricoScreen = ({ navigation }) => {
   const [selected, setSelected] = useState("");
   return (
     <View
@@ -49,6 +49,7 @@ const HistoricoScreen = () => {
         }}
       >
         <Calendar
+          onPress={() => navigation.navigate("Estatistica")}
           style={{ backgroundColor: "#ffeba3" }}
           onDayPress={(day) => {
             setSelected(day.dateString);

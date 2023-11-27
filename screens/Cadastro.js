@@ -139,24 +139,23 @@ const CadastroScreen = ({ navigation }) => {
               }}
             ></TextInput>
           </Pressable>
-          <TouchableOpacity>
-            <Pressable
-              style={{
-                backgroundColor: "#FFD14F",
-                flex: 1,
-                flexDirection: "row",
-                justifyContent: "center",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
-                marginLeft: 72,
-                marginRight: 72,
-                borderRadius: 15,
-              }}
-              title="Enviar"
-            >
-              <Text>Enviar</Text>
-            </Pressable>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Home")}
+            style={{
+              backgroundColor: "#FFD14F",
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "center",
+              padding: 12,
+              marginTop: 12,
+              marginBottom: 12,
+              marginLeft: 72,
+              marginRight: 72,
+              borderRadius: 15,
+            }}
+            title="Enviar"
+          >
+            <Text>Enviar</Text>
           </TouchableOpacity>
           <View style={{ marginTop: 30 }}>
             <Pressable onPress={() => navigation.navigate("Login")}>

@@ -1,4 +1,11 @@
-import { ScrollView, Text, View, Image } from "react-native";
+import {
+  ScrollView,
+  Text,
+  View,
+  Image,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
 
 const EstatisticaScreen = ({ navigation }) => {
   return (
@@ -23,10 +30,12 @@ const EstatisticaScreen = ({ navigation }) => {
         }}
       >
         <View>
-          <Image
-            source={require("../assets/abacaxi.png")}
-            style={{ width: 27, height: 51 }}
-          />
+          <Pressable onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../assets/abacaxi.png")}
+              style={{ width: 27, height: 51 }}
+            />
+          </Pressable>
         </View>
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
@@ -50,6 +59,24 @@ const EstatisticaScreen = ({ navigation }) => {
           <Text>Refeição 4</Text>
           <Text>Refeição 5</Text>
           <Text>Refeição 6</Text>
+        </View>
+        <View style={{ justifyContent: "center", alignItems: "center" }}>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Text
+              style={{
+                textAlign: "center",
+                color: "#10482f",
+                fontSize: 15,
+                marginTop: 12,
+                backgroundColor: "#FFD14F",
+                padding: 15,
+                width: "80%",
+                borderRadius: 15,
+              }}
+            >
+              Ir para a Página Inicial
+            </Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>

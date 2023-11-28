@@ -1,6 +1,12 @@
-import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useAlimentosContext } from "../contexts/AlimentoContext";
-import { useEffect } from "react";
 
 const ListaCafeDaManha = ({ navigation }) => {
   const { alimentos } = useAlimentosContext();
@@ -39,21 +45,84 @@ const ListaCafeDaManha = ({ navigation }) => {
             CAFÉ DA MANHÃ
           </Text>
         </View>
-
-        <View>
-          {alimentos.map((a) => {
-            if (a.categoria === "Café da Manhã")
-              return (
-                <>
-                  <Text>
-                    {a.nome}
-                    {a.qtd}
-                  </Text>
-                </>
-              );
-          })}
-        </View>
       </View>
+      <ScrollView style={{ padding: 15 }}>
+        <View
+          style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            backgroundColor: "#ffeba3",
+          }}
+        >
+          <View
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              margin: 51,
+              justifyContent: "center",
+              alignContent: "center",
+              alignItems: "center",
+              backgroundColor: "#ffeba3",
+            }}
+          >
+            {alimentos.map((a) => {
+              if (a.categoria === "Café da Manhã")
+                return (
+                  <View
+                    key={a.id}
+                    style={{ display: "flex", flexDirection: "row" }}
+                  >
+                    <Text
+                      style={{
+                        flex: 1,
+                        fontSize: 24,
+                        color: "#10482f",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        backgroundColor: "#ffeba3",
+                      }}
+                    >
+                      {`${a.nome}  =>  ${a.qtd}`}
+                    </Text>
+                    <Pressable onPress={() => {}}>
+                      <Image
+                        source={require("../assets/icons8-excluir.png")}
+                        style={{
+                          width: 30,
+                          height: 30,
+                        }}
+                      />
+                    </Pressable>
+                  </View>
+                );
+            })}
+          </View>
+        </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+          style={{
+            backgroundColor: "#FFD14F",
+            flex: 1,
+            flexDirection: "row",
+            justifyContent: "center",
+            padding: 12,
+            marginTop: 12,
+            marginBottom: 12,
+            marginLeft: 72,
+            marginRight: 72,
+            borderRadius: 15,
+          }}
+          title="Voltar"
+        >
+          <Text style={{ textAlign: "center", color: "#10482f", fontSize: 15 }}>
+            Voltar para Página Inicial
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };

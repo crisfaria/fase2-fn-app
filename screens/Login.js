@@ -104,28 +104,26 @@ const LoginScreen = ({ navigation }) => {
               }}
             ></TextInput>
           </Pressable>
-          <TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                setUser({ email });
-                navigation.navigate("Home");
-              }}
-              style={{
-                backgroundColor: "#FFD14F",
-                flex: 1,
-                flexDirection: "row",
-                justifyContent: "center",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
-                marginLeft: 72,
-                marginRight: 72,
-                borderRadius: 15,
-              }}
-              title="Entrar"
-            >
-              <Text>Entrar</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setUser({ email });
+              navigation.navigate("Home");
+            }}
+            style={{
+              backgroundColor: "#FFD14F",
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "center",
+              padding: 12,
+              marginTop: 12,
+              marginBottom: 12,
+              marginLeft: 72,
+              marginRight: 72,
+              borderRadius: 15,
+            }}
+            title="Entrar"
+          >
+            <Text>Entrar</Text>
           </TouchableOpacity>
           <View style={{ marginTop: 30 }}>
             <TouchableOpacity onPress={() => navigation.navigate("Cadastro")}>

@@ -1,6 +1,6 @@
 import { Image, Pressable, Text, View } from "react-native";
 
-const ListaAlmoco = () => {
+const ListaAlmoco = ({ navigation }) => {
   return (
     <View
       style={{

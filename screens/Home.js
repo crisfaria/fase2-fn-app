@@ -15,7 +15,7 @@ import { useUserContext } from "../contexts/UserContext";
 
 const HomeScreen = ({ navigation }) => {
   const handleAddMealPress = () => {
-    navigation.navigate("Registro");
+    navigation.navigate("RegistroAlimentos");
   };
 
   const { user } = useUserContext();
@@ -43,10 +43,18 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const data = [
-    { id: 1, image: require("../assets/cafedamanha.png") },
-    { id: 2, image: require("../assets/almoco.png") },
-    { id: 3, image: require("../assets/lanche.png") },
-    { id: 4, image: require("../assets/jantar.png") },
+    {
+      id: 1,
+      image: require("../assets/cafedamanha.png"),
+      target: "ListaCafeDaManha",
+    },
+    {
+      id: 2,
+      image: require("../assets/almoco.png"),
+      target: "ListaAlmoco",
+    },
+    { id: 3, image: require("../assets/lanche.png"), target: "ListaLanche" },
+    { id: 4, image: require("../assets/jantar.png"), target: "ListaJantar" },
   ];
 
   return (
@@ -147,9 +155,13 @@ const HomeScreen = ({ navigation }) => {
           <Carousel
             data={data}
             renderItem={({ item }) => (
-              <View style={styles.carouselItem}>
-                <Image source={item.image} style={styles.image} />
-              </View>
+              <TouchableOpacity
+                onPress={() => navigation.navigate(item.target)}
+              >
+                <View style={styles.carouselItem}>
+                  <Image source={item.image} style={styles.image} />
+                </View>
+              </TouchableOpacity>
             )}
             sliderWidth={400}
             itemWidth={160}

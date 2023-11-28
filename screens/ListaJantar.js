@@ -1,6 +1,6 @@
 import { Image, Pressable, Text, View } from "react-native";
 
-const ListaJantar = () => {
+const ListaJantar = ({ navigation }) => {
   return (
     <View
       style={{

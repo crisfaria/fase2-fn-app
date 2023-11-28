@@ -1,6 +1,10 @@
-import { Image, Pressable, Text, View } from "react-native";
+import { Image, Pressable, Text, TouchableOpacity, View } from "react-native";
+import { useAlimentosContext } from "../contexts/AlimentoContext";
+import { useEffect } from "react";
 
-const ListaCafeDaManha = () => {
+const ListaCafeDaManha = ({ navigation }) => {
+  const { alimentos } = useAlimentosContext();
+
   return (
     <View
       style={{
@@ -32,8 +36,22 @@ const ListaCafeDaManha = () => {
         </View>
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
-            REGISTRO DE ALIMENTOS
+            CAFÉ DA MANHÃ
           </Text>
+        </View>
+
+        <View>
+          {alimentos.map((a) => {
+            if (a.categoria === "Café da Manhã")
+              return (
+                <>
+                  <Text>
+                    {a.nome}
+                    {a.qtd}
+                  </Text>
+                </>
+              );
+          })}
         </View>
       </View>
     </View>

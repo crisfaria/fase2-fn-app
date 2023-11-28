@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import {
   Text,
   View,
@@ -7,8 +8,12 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { useUserContext } from "../contexts/UserContext";
 
 const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const { setUser } = useUserContext();
+
   return (
     <View
       style={{
@@ -58,6 +63,11 @@ const LoginScreen = ({ navigation }) => {
           </Text>
           <Pressable>
             <TextInput
+              value={email}
+              onChangeText={(text) => {
+                console.log(text);
+                setEmail(text);
+              }}
               placeholder="Digite seu Email aqui"
               keyboardType="email-address"
               style={{
@@ -96,7 +106,10 @@ const LoginScreen = ({ navigation }) => {
           </Pressable>
           <TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigation.navigate("Home")}
+              onPress={() => {
+                setUser({ email });
+                navigation.navigate("Home");
+              }}
               style={{
                 backgroundColor: "#FFD14F",
                 flex: 1,

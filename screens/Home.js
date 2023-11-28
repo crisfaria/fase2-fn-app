@@ -11,11 +11,14 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import Carousel from "react-native-snap-carousel";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useUserContext } from "../contexts/UserContext";
 
 const HomeScreen = ({ navigation }) => {
   const handleAddMealPress = () => {
     navigation.navigate("Registro");
   };
+
+  const { user } = useUserContext();
 
   const [waterHistory, setWaterHistory] = useState([]);
 
@@ -71,6 +74,9 @@ const HomeScreen = ({ navigation }) => {
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
             PÁGINA INICIAL
           </Text>
+          <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
+            {user?.email}
+          </Text>
         </View>
       </View>
       <View style={styles.waterHistoryBox}>
@@ -110,7 +116,7 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => addToWaterHistory(1000)}
         >
           <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>1L</Text>
+            <Text style={styles.buttonText}>1 L</Text>
             <Ionicons name="water" size={30} color="#000" style={styles.icon} />
           </View>
         </TouchableOpacity>
@@ -120,7 +126,7 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => addToWaterHistory(500)}
         >
           <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>500ml</Text>
+            <Text style={styles.buttonText}>500 ml</Text>
             <Ionicons name="water" size={30} color="#000" style={styles.icon} />
           </View>
         </TouchableOpacity>
@@ -130,7 +136,7 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => addToWaterHistory(200)}
         >
           <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>200ml</Text>
+            <Text style={styles.buttonText}>200 ml</Text>
             <Ionicons name="water" size={30} color="#000" style={styles.icon} />
           </View>
         </TouchableOpacity>
@@ -177,6 +183,8 @@ const styles = StyleSheet.create({
   },
   carouselContainer: {
     height: 280,
+    marginBottom: 60,
+    marginTop: 30,
   },
   description: {
     textAlign: "center",
@@ -261,7 +269,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginHorizontal: 20,
-    marginBottom: 10, // Ajuste conforme necessário
+    marginTop: 30,
+    marginBottom: 30, // Ajuste conforme necessário
     flexGrow: 1,
     borderWidth: 2,
     borderColor: "#000",

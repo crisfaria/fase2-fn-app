@@ -54,6 +54,32 @@ const RegistroAlimentosScreen = ({ navigation }) => {
               color: "#10482f",
             }}
           >
+            Categoria do Alimento:
+          </Text>
+          <Pressable>
+            <TextInput
+              placeholder="Ex: Café da Manhã"
+              keyboardType="default"
+              style={{
+                backgroundColor: "#ffffff",
+                padding: 12,
+                marginTop: 12,
+                // marginBottom: 12,
+
+                borderRadius: 15,
+              }}
+            ></TextInput>
+          </Pressable>
+        </View>
+        <View style={{ padding: 15 }}>
+          <Text
+            style={{
+              // marginTop: 15,
+              fontSize: 18,
+              marginLeft: 12,
+              color: "#10482f",
+            }}
+          >
             Nome do Alimento:
           </Text>
           <Pressable>

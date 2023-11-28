@@ -11,11 +11,14 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import Carousel from "react-native-snap-carousel";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { useUserContext } from "../contexts/UserContext";
 
 const HomeScreen = ({ navigation }) => {
   const handleAddMealPress = () => {
-    navigation.navigate("Registro");
+    navigation.navigate("RegistroAlimentos");
   };
+
+  const { user } = useUserContext();
 
   const [waterHistory, setWaterHistory] = useState([]);
 
@@ -40,10 +43,18 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const data = [
-    { id: 1, image: require("../assets/cafedamanha.png") },
-    { id: 2, image: require("../assets/almoco.png") },
-    { id: 3, image: require("../assets/lanche.png") },
-    { id: 4, image: require("../assets/jantar.png") },
+    {
+      id: 1,
+      image: require("../assets/cafedamanha.png"),
+      target: "ListaCafeDaManha",
+    },
+    {
+      id: 2,
+      image: require("../assets/almoco.png"),
+      target: "ListaAlmoco",
+    },
+    { id: 3, image: require("../assets/lanche.png"), target: "ListaLanche" },
+    { id: 4, image: require("../assets/jantar.png"), target: "ListaJantar" },
   ];
 
   return (
@@ -70,6 +81,9 @@ const HomeScreen = ({ navigation }) => {
         <View>
           <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
             PÁGINA INICIAL
+          </Text>
+          <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
+            {user?.email}
           </Text>
         </View>
       </View>
@@ -110,7 +124,7 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => addToWaterHistory(1000)}
         >
           <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>1L</Text>
+            <Text style={styles.buttonText}>1 L</Text>
             <Ionicons name="water" size={30} color="#000" style={styles.icon} />
           </View>
         </TouchableOpacity>
@@ -120,7 +134,7 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => addToWaterHistory(500)}
         >
           <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>500ml</Text>
+            <Text style={styles.buttonText}>500 ml</Text>
             <Ionicons name="water" size={30} color="#000" style={styles.icon} />
           </View>
         </TouchableOpacity>
@@ -130,7 +144,7 @@ const HomeScreen = ({ navigation }) => {
           onPress={() => addToWaterHistory(200)}
         >
           <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>200ml</Text>
+            <Text style={styles.buttonText}>200 ml</Text>
             <Ionicons name="water" size={30} color="#000" style={styles.icon} />
           </View>
         </TouchableOpacity>
@@ -141,9 +155,13 @@ const HomeScreen = ({ navigation }) => {
           <Carousel
             data={data}
             renderItem={({ item }) => (
-              <View style={styles.carouselItem}>
-                <Image source={item.image} style={styles.image} />
-              </View>
+              <TouchableOpacity
+                onPress={() => navigation.navigate(item.target)}
+              >
+                <View style={styles.carouselItem}>
+                  <Image source={item.image} style={styles.image} />
+                </View>
+              </TouchableOpacity>
             )}
             sliderWidth={400}
             itemWidth={160}
@@ -177,6 +195,8 @@ const styles = StyleSheet.create({
   },
   carouselContainer: {
     height: 280,
+    marginBottom: 60,
+    marginTop: 30,
   },
   description: {
     textAlign: "center",
@@ -261,7 +281,8 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     marginHorizontal: 20,
-    marginBottom: 10, // Ajuste conforme necessário
+    marginTop: 30,
+    marginBottom: 30, // Ajuste conforme necessário
     flexGrow: 1,
     borderWidth: 2,
     borderColor: "#000",

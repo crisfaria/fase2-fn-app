@@ -18,7 +18,8 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate("RegistroAlimentos");
   };
 
-  const { user } = useUserContext();
+  const { getUser, logout } = useUserContext();
+  const user = getUser();
 
   const [waterHistory, setWaterHistory] = useState([]);
 
@@ -95,7 +96,7 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => alert("fazendo logout")}>
+        <TouchableOpacity onPress={() => logout()}>
           <Image
             source={require("../assets/logout.png")}
             style={{ width: 51, height: 51, marginRight: 15 }}

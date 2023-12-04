@@ -10,9 +10,10 @@ import {
 } from "react-native";
 import { useUserContext } from "../contexts/UserContext";
 import { useForm, Controller } from "react-hook-form";
+import { autenticaUsuario } from "../services/authService";
 
 const LoginScreen = ({ navigation }) => {
-  const { setUser } = useUserContext();
+  const { login } = useUserContext();
 
   const {
     control,
@@ -26,21 +27,13 @@ const LoginScreen = ({ navigation }) => {
   });
 
   const onSubmit = async (data) => {
-    navigation.navigate("Home");
-    // try {
-    //   const respostaDoBackend = await fetch("url do servidor/login", {
-    //     method: "POST",
-    //     body: data,
-    //   });
-
-    //   if (respostaDoBackend.status === 200) {
-    //     alert("ihuuuu deu bom, logou");
-    //   } else {
-    //     alert("Credenciais inválidas.");
-    //   }
-    // } catch (e) {
-    //   alert("deu ruim pra valer.");
-    // }
+    const resultado = autenticaUsuario(data);
+    if (resultado === true) {
+      // chamar função de login pra salvar o usuário no contexto
+      navigation.navigate("Home");
+    } else {
+      alert("Credenciais de acesso inválidas.");
+    }
   };
 
   return (

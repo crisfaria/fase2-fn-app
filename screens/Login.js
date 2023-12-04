@@ -12,7 +12,7 @@ import { useForm, Controller } from "react-hook-form";
 import { autenticaUsuario } from "../services/authService";
 
 const LoginScreen = ({ navigation }) => {
-  const { login } = useUserContext();
+  const { login } = useUserContext(); //Função para contexto de usuário
 
   const {
     control,
@@ -23,7 +23,7 @@ const LoginScreen = ({ navigation }) => {
       email: "",
       senha: "",
     },
-  });
+  }); //Função de checagem para o Login
 
   const onSubmit = async (data) => {
     const resultado = await autenticaUsuario(data);
@@ -33,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
     } else {
       alert("Credenciais de acesso inválidas.");
     }
-  };
+  }; //Função de validação de credenciais
 
   return (
     <View
@@ -212,7 +212,11 @@ const LoginScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
-    </View>
+    </View> //Nessa View consta: o cabeçalho da Logo do Abacaxi com a navegação de voltar a página.
+    //Contém o nome da página onde o usuário esta navegando.
+    //Campos para o preenchimento com as informações do cadastro e botão de "entrar" navegando para a página principal.
+    //Caso o usuário não tenha cadastro, aparecerá um "Alert" indicando que o mesmo não foi cadastrado.
+    //Texto clicável, direcionando para tela de cadastro.
   );
 };
 

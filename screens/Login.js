@@ -52,6 +52,7 @@ const LoginScreen = ({ navigation }) => {
           flexDirection: "row",
           alignItems: "center",
           padding: 30,
+          paddingTop: 54,
           paddingLeft: 15,
           paddingRight: 15,
         }}

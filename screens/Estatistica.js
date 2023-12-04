@@ -29,6 +29,7 @@ const EstatisticaScreen = ({ navigation }) => {
           justifyContent: "space-between",
           alignItems: "center",
           padding: 30,
+          paddingTop: 54,
           paddingLeft: 15,
           paddingRight: 15,
         }}

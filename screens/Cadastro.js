@@ -9,8 +9,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
+import { cadastraUsuario } from "../services/authService";
+import { useUserContext } from "../contexts/UserContext";
 
 const CadastroScreen = ({ navigation }) => {
+  const { login } = useUserContext();
+
   const {
     control,
     handleSubmit,
@@ -26,19 +30,12 @@ const CadastroScreen = ({ navigation }) => {
   });
 
   const onSubmit = async (data) => {
-    try {
-      const respostaDoBackend = await fetch("url do servidor/login", {
-        method: "POST",
-        body: data,
-      });
-
-      if (respostaDoBackend.status === 200) {
-        alert("ihuuuu deu bom, logou");
-      } else {
-        alert("Credenciais inválidas.");
-      }
-    } catch (e) {
-      alert("deu ruim pra valer.");
+    const resultado = await cadastraUsuario(data);
+    if (resultado === true) {
+      login({ email: data.email });
+      navigation.navigate("Home");
+    } else {
+      alert("Usuário já cadastrado.");
     }
   };
 

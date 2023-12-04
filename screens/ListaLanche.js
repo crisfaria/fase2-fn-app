@@ -26,25 +26,43 @@ const ListaLanche = ({ navigation }) => {
           backgroundColor: "#cceb9d",
           display: "flex",
           flexDirection: "row",
+          justifyContent: "space-between",
           alignItems: "center",
           padding: 30,
           paddingLeft: 15,
           paddingRight: 15,
         }}
       >
-        <View>
-          <Pressable onPress={() => navigation.goBack()}>
-            <Image
-              source={require("../assets/abacaxi.png")}
-              style={{ width: 27, height: 51 }}
-            />
-          </Pressable>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image
+                source={require("../assets/abacaxi.png")}
+                style={{ width: 27, height: 51 }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
+              LANCHE
+            </Text>
+            <Text
+              style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}
+            ></Text>
+          </View>
         </View>
-        <View>
-          <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
-            LANCHE
-          </Text>
-        </View>
+        <TouchableOpacity onPress={() => alert("fazendo logout")}>
+          <Image
+            source={require("../assets/logout.png")}
+            style={{ width: 51, height: 51, marginRight: 15 }}
+          />
+        </TouchableOpacity>
       </View>
       <ScrollView style={{ padding: 15 }}>
         <View

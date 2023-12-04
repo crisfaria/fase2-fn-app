@@ -9,10 +9,39 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useUserContext } from "../contexts/UserContext";
+import { useForm, Controller } from "react-hook-form";
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("");
   const { setUser } = useUserContext();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      email: "",
+      senha: "",
+    },
+  });
+
+  const onSubmit = async (data) => {
+    navigation.navigate("Home");
+    // try {
+    //   const respostaDoBackend = await fetch("url do servidor/login", {
+    //     method: "POST",
+    //     body: data,
+    //   });
+
+    //   if (respostaDoBackend.status === 200) {
+    //     alert("ihuuuu deu bom, logou");
+    //   } else {
+    //     alert("Credenciais inválidas.");
+    //   }
+    // } catch (e) {
+    //   alert("deu ruim pra valer.");
+    // }
+  };
 
   return (
     <View
@@ -62,23 +91,42 @@ const LoginScreen = ({ navigation }) => {
             Email:
           </Text>
           <Pressable>
-            <TextInput
-              value={email}
-              onChangeText={(text) => {
-                console.log(text);
-                setEmail(text);
+            <Controller
+              control={control}
+              rules={{
+                required: true,
               }}
-              placeholder="Digite seu Email aqui"
-              keyboardType="email-address"
-              style={{
-                backgroundColor: "#ffffff",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  placeholder="Digite seu Email aqui"
+                  keyboardType="email-address"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    padding: 12,
+                    marginTop: 12,
+                    marginBottom: 12,
 
-                borderRadius: 15,
-              }}
-            ></TextInput>
+                    borderRadius: 15,
+                  }}
+                ></TextInput>
+              )}
+              name="email"
+            />
+            {errors.email && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Campo de preenchimento obrigatório.
+              </Text>
+            )}
           </Pressable>
           <Text
             style={{
@@ -91,24 +139,59 @@ const LoginScreen = ({ navigation }) => {
             Senha:
           </Text>
           <Pressable>
-            <TextInput
-              placeholder="Digite sua Senha aqui"
-              keyboardType="numeric"
-              style={{
-                backgroundColor: "#ffffff",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
-
-                borderRadius: 15,
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+                minLength: 6,
               }}
-            ></TextInput>
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  secureTextEntry={true}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Digite sua Senha aqui"
+                  keyboardType="numeric"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    padding: 12,
+                    marginTop: 12,
+                    marginBottom: 12,
+
+                    borderRadius: 15,
+                  }}
+                ></TextInput>
+              )}
+              name="senha"
+            />
+            {errors.senha?.type === "required" && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Campo de preenchimento obrigatório.
+              </Text>
+            )}
+            {errors.senha?.type === "minLength" && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Sua senha deve conter no mínimo 6 números.
+              </Text>
+            )}
           </Pressable>
           <TouchableOpacity
-            onPress={() => {
-              setUser({ email });
-              navigation.navigate("Home");
-            }}
+            onPress={handleSubmit(onSubmit)}
             style={{
               backgroundColor: "#FFD14F",
               flex: 1,

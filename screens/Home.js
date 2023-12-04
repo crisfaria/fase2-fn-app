@@ -18,7 +18,8 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate("RegistroAlimentos");
   };
 
-  const { user } = useUserContext();
+  const { getUser, logout } = useUserContext();
+  const user = getUser();
 
   const [waterHistory, setWaterHistory] = useState([]);
 
@@ -64,28 +65,49 @@ const HomeScreen = ({ navigation }) => {
           backgroundColor: "#cceb9d",
           display: "flex",
           flexDirection: "row",
+          justifyContent: "space-between",
           alignItems: "center",
           padding: 30,
+          paddingTop: 54,
           paddingLeft: 15,
           paddingRight: 15,
         }}
       >
-        <View>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Image
-              source={require("../assets/abacaxi.png")}
-              style={{ width: 27, height: 51 }}
-            />
-          </TouchableOpacity>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image
+                source={require("../assets/abacaxi.png")}
+                style={{ width: 27, height: 51 }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
+              PÁGINA INICIAL
+            </Text>
+            <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
+              {user?.email}
+            </Text>
+          </View>
         </View>
-        <View>
-          <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
-            PÁGINA INICIAL
-          </Text>
-          <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
-            {user?.email}
-          </Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+            navigation.navigate("Login");
+          }}
+        >
+          <Image
+            source={require("../assets/logout.png")}
+            style={{ width: 51, height: 51, marginRight: 15 }}
+          />
+        </TouchableOpacity>
       </View>
       <View style={styles.waterHistoryBox}>
         <Text style={styles.waterHistoryTitle}>Histórico de Água</Text>

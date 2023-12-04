@@ -6,8 +6,11 @@ import {
   Pressable,
   TouchableOpacity,
 } from "react-native";
+import { useUserContext } from "../contexts/UserContext";
 
 const EstatisticaScreen = ({ navigation }) => {
+  const { getUser, logout } = useUserContext();
+  const user = getUser();
   return (
     <View
       style={{
@@ -23,25 +26,49 @@ const EstatisticaScreen = ({ navigation }) => {
           backgroundColor: "#cceb9d",
           display: "flex",
           flexDirection: "row",
+          justifyContent: "space-between",
           alignItems: "center",
           padding: 30,
+          paddingTop: 54,
           paddingLeft: 15,
           paddingRight: 15,
         }}
       >
-        <View>
-          <Pressable onPress={() => navigation.goBack()}>
-            <Image
-              source={require("../assets/abacaxi.png")}
-              style={{ width: 27, height: 51 }}
-            />
-          </Pressable>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image
+                source={require("../assets/abacaxi.png")}
+                style={{ width: 27, height: 51 }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
+              ESTATÍSTICA
+            </Text>
+            <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
+              {user?.email}
+            </Text>
+          </View>
         </View>
-        <View>
-          <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
-            ESTATÍSTICA
-          </Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+            navigation.navigate("Login");
+          }}
+        >
+          <Image
+            source={require("../assets/logout.png")}
+            style={{ width: 51, height: 51, marginRight: 15 }}
+          />
+        </TouchableOpacity>
       </View>
       <ScrollView>
         <View>

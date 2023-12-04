@@ -1,16 +1,20 @@
 import {
-  Image,
-  Pressable,
-  ScrollView,
   Text,
-  TouchableOpacity,
   View,
+  Image,
+  ScrollView,
+  Pressable,
+  TouchableOpacity,
 } from "react-native";
+
 import { useAlimentosContext } from "../contexts/AlimentoContext";
+import { useUserContext } from "../contexts/UserContext";
 
 const ListaAlmoco = ({ navigation }) => {
-  const { alimentos } = useAlimentosContext();
-
+  const { listarAlimentos, removerAlimento } = useAlimentosContext();
+  const alimentos = listarAlimentos();
+  const { getUser, logout } = useUserContext();
+  const user = getUser();
   return (
     <View
       style={{
@@ -26,26 +30,51 @@ const ListaAlmoco = ({ navigation }) => {
           backgroundColor: "#cceb9d",
           display: "flex",
           flexDirection: "row",
+          justifyContent: "space-between",
           alignItems: "center",
           padding: 30,
+          paddingTop: 54,
           paddingLeft: 15,
           paddingRight: 15,
         }}
       >
-        <View>
-          <Pressable onPress={() => navigation.goBack()}>
-            <Image
-              source={require("../assets/abacaxi.png")}
-              style={{ width: 27, height: 51 }}
-            />
-          </Pressable>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
+          <View>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Image
+                source={require("../assets/abacaxi.png")}
+                style={{ width: 27, height: 51 }}
+              />
+            </TouchableOpacity>
+          </View>
+          <View>
+            <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
+              ALMOÇO
+            </Text>
+            <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
+              {user?.email}
+            </Text>
+          </View>
         </View>
-        <View>
-          <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
-            ALMOÇO
-          </Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+            navigation.navigate("Login");
+          }}
+        >
+          <Image
+            source={require("../assets/logout.png")}
+            style={{ width: 51, height: 51, marginRight: 15 }}
+          />
+        </TouchableOpacity>
       </View>
+
       <ScrollView style={{ padding: 15 }}>
         <View
           style={{
@@ -68,6 +97,7 @@ const ListaAlmoco = ({ navigation }) => {
               backgroundColor: "#ffeba3",
             }}
           >
+            {alimentos.length === 0 && <Text>Nenhum registro encontrado.</Text>}
             {alimentos.map((a) => {
               if (a.categoria === "Almoço")
                 return (
@@ -86,9 +116,13 @@ const ListaAlmoco = ({ navigation }) => {
                         backgroundColor: "#ffeba3",
                       }}
                     >
-                      {`${a.nome}  =>  ${a.qtd}`}
+                      {`${a.nomeDoAlimento}  =>  ${a.qtdDoAlimento}`}
                     </Text>
-                    <Pressable onPress={() => {}}>
+                    <Pressable
+                      onPress={() => {
+                        removerAlimento(a.id);
+                      }}
+                    >
                       <Image
                         source={require("../assets/icons8-excluir.png")}
                         style={{

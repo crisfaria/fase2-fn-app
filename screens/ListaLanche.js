@@ -7,9 +7,13 @@ import {
   View,
 } from "react-native";
 import { useAlimentosContext } from "../contexts/AlimentoContext";
+import { useUserContext } from "../contexts/UserContext";
 
 const ListaLanche = ({ navigation }) => {
-  const { alimentos } = useAlimentosContext();
+  const { listarAlimentos, removerAlimento } = useAlimentosContext();
+  const alimentos = listarAlimentos();
+  const { getUser, logout } = useUserContext();
+  const user = getUser();
 
   return (
     <View
@@ -52,12 +56,17 @@ const ListaLanche = ({ navigation }) => {
             <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
               LANCHE
             </Text>
-            <Text
-              style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}
-            ></Text>
+            <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
+              {user?.email}
+            </Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => alert("fazendo logout")}>
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+            navigation.navigate("Login");
+          }}
+        >
           <Image
             source={require("../assets/logout.png")}
             style={{ width: 51, height: 51, marginRight: 15 }}
@@ -86,6 +95,7 @@ const ListaLanche = ({ navigation }) => {
               backgroundColor: "#ffeba3",
             }}
           >
+            {alimentos.length === 0 && <Text>Nenhum registro encontrado.</Text>}
             {alimentos.map((a) => {
               if (a.categoria === "Lanche")
                 return (
@@ -104,9 +114,13 @@ const ListaLanche = ({ navigation }) => {
                         backgroundColor: "#ffeba3",
                       }}
                     >
-                      {`${a.nome}  =>  ${a.qtd}`}
+                      {`${a.nomeDoAlimento}  =>  ${a.qtdDoAlimento}`}
                     </Text>
-                    <Pressable onPress={() => {}}>
+                    <Pressable
+                      onPress={() => {
+                        removerAlimento(a.id);
+                      }}
+                    >
                       <Image
                         source={require("../assets/icons8-excluir.png")}
                         style={{

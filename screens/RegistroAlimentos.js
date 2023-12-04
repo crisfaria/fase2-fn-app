@@ -1,5 +1,4 @@
 import RNPickerSelect from "react-native-picker-select";
-import { useState } from "react";
 import {
   Text,
   View,
@@ -11,13 +10,30 @@ import {
 } from "react-native";
 import { useAlimentosContext } from "../contexts/AlimentoContext";
 import { v4 as uuidv4 } from "uuid";
+import { useUserContext } from "../contexts/UserContext";
+import { useForm, Controller } from "react-hook-form";
 
 const RegistroAlimentosScreen = ({ navigation }) => {
-  const [categoria, setCategoria] = useState("");
-  const [nomeDoAlimento, setnomeDoAlimento] = useState("");
-  const [qtdDoAlimento, setQtdDoAlimento] = useState("");
+  const { adicionarAlimento } = useAlimentosContext();
+  const { getUser, logout } = useUserContext();
+  const user = getUser();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      categoria: "Café da Manhã",
+      nomeDoAlimento: "",
+      qtdDoAlimento: "",
+    },
+  });
 
-  const { alimentos, setAlimentos } = useAlimentosContext();
+  const onSubmit = async (data) => {
+    adicionarAlimento({ ...data, id: uuidv4() });
+
+    navigation.navigate("Home");
+  };
 
   return (
     <View
@@ -60,12 +76,17 @@ const RegistroAlimentosScreen = ({ navigation }) => {
             <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
               REGISTRO DE ALIMENTOS
             </Text>
-            <Text
-              style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}
-            ></Text>
+            <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
+              {user?.email}
+            </Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => alert("fazendo logout")}>
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+            navigation.navigate("Login");
+          }}
+        >
           <Image
             source={require("../assets/logout.png")}
             style={{ width: 51, height: 51, marginRight: 15 }}
@@ -84,23 +105,46 @@ const RegistroAlimentosScreen = ({ navigation }) => {
           >
             Categoria do Alimento:
           </Text>
-          <RNPickerSelect
-            value={categoria}
-            placeholder="Escolha a categoria"
-            onValueChange={(value) => setCategoria(value)}
-            items={[
-              { label: "Café da Manhã", value: "Café da Manhã" },
-              { label: "Almoço", value: "Almoço" },
-              { label: "Lanche", value: "Lanche" },
-              { label: "Jantar", value: "Jantar" },
-            ]}
-            style={{
-              backgroundColor: "#ffffff",
-              padding: 12,
-              marginTop: 12,
-              borderRadius: 15,
+          <Controller
+            control={control}
+            rules={{
+              required: true,
             }}
+            render={({ field: { onChange, onBlur, value } }) => (
+              <RNPickerSelect
+                key={uuidv4()}
+                onBlur={onBlur}
+                value={value}
+                placeholder="Escolha a categoria"
+                onValueChange={onChange}
+                items={[
+                  { label: "Café da Manhã", value: "Café da Manhã" },
+                  { label: "Almoço", value: "Almoço" },
+                  { label: "Lanche", value: "Lanche" },
+                  { label: "Jantar", value: "Jantar" },
+                ]}
+                style={{
+                  backgroundColor: "#ffffff",
+                  padding: 12,
+                  marginTop: 12,
+                  borderRadius: 15,
+                }}
+              />
+            )}
+            name="categoria"
           />
+          {errors.categoria?.type === "required" && (
+            <Text
+              style={{
+                color: "#cc0000",
+                fontWeight: "bold",
+                marginBottom: 12,
+                marginLeft: 12,
+              }}
+            >
+              Campo de preenchimento obrigatório.
+            </Text>
+          )}
         </View>
         <View style={{ padding: 15 }}>
           <Text
@@ -114,22 +158,42 @@ const RegistroAlimentosScreen = ({ navigation }) => {
             Nome do Alimento:
           </Text>
           <Pressable>
-            <TextInput
-              value={nomeDoAlimento}
-              onChangeText={(texto) => {
-                setnomeDoAlimento(texto);
+            <Controller
+              control={control}
+              rules={{
+                required: true,
               }}
-              placeholder="Escreva o nome do alimento"
-              keyboardType="default"
-              style={{
-                backgroundColor: "#ffffff",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Escreva o nome do alimento"
+                  keyboardType="default"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    padding: 12,
+                    marginTop: 12,
+                    marginBottom: 12,
 
-                borderRadius: 15,
-              }}
-            ></TextInput>
+                    borderRadius: 15,
+                  }}
+                ></TextInput>
+              )}
+              name="nomeDoAlimento"
+            />
+            {errors.nomeDoAlimento?.type === "required" && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Campo de preenchimento obrigatório.
+              </Text>
+            )}
           </Pressable>
           <Text
             style={{
@@ -142,37 +206,45 @@ const RegistroAlimentosScreen = ({ navigation }) => {
             Quantidade:
           </Text>
           <Pressable>
-            <TextInput
-              value={qtdDoAlimento}
-              onChangeText={(texto) => {
-                setQtdDoAlimento(texto);
+            <Controller
+              control={control}
+              rules={{
+                required: true,
               }}
-              placeholder="Ex: 200"
-              keyboardType="numeric"
-              style={{
-                backgroundColor: "#ffffff",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  onBlur={onBlur}
+                  value={value}
+                  onChangeText={onChange}
+                  placeholder="Ex: 200"
+                  keyboardType="numeric"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    padding: 12,
+                    marginTop: 12,
+                    marginBottom: 12,
 
-                borderRadius: 15,
-              }}
-            ></TextInput>
+                    borderRadius: 15,
+                  }}
+                ></TextInput>
+              )}
+              name="qtdDoAlimento"
+            />
+            {errors.qtdDoAlimento?.type === "required" && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Campo de preenchimento obrigatório.
+              </Text>
+            )}
           </Pressable>
           <TouchableOpacity
-            onPress={() => {
-              const novosAlimentos = [
-                ...alimentos,
-                {
-                  id: uuidv4(),
-                  nome: nomeDoAlimento.trim(),
-                  qtd: qtdDoAlimento.trim(),
-                  categoria: categoria,
-                },
-              ];
-              setAlimentos(novosAlimentos);
-              navigation.goBack();
-            }}
+            onPress={handleSubmit(onSubmit)}
             style={{
               backgroundColor: "#FFD14F",
               flex: 1,
@@ -187,9 +259,7 @@ const RegistroAlimentosScreen = ({ navigation }) => {
             }}
             title="Salvar"
           >
-            <Pressable>
-              <Text style={{ fontWeight: "bold", fontSize: 18 }}>Salvar</Text>
-            </Pressable>
+            <Text style={{ fontWeight: "bold", fontSize: 18 }}>Salvar</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

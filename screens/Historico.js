@@ -1,9 +1,12 @@
 import { View, Text, Image, Pressable } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { useState } from "react";
+import { useUserContext } from "../contexts/UserContext";
 
 const HistoricoScreen = ({ navigation }) => {
   const [selected, setSelected] = useState("");
+  const { getUser, logout } = useUserContext();
+  const user = getUser();
   return (
     <View
       style={{
@@ -45,12 +48,17 @@ const HistoricoScreen = ({ navigation }) => {
             <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
               HISTÓRICO
             </Text>
-            <Text
-              style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}
-            ></Text>
+            <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
+              {user?.email}
+            </Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => alert("fazendo logout")}>
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+            navigation.navigate("Login");
+          }}
+        >
           <Image
             source={require("../assets/logout.png")}
             style={{ width: 51, height: 51, marginRight: 15 }}

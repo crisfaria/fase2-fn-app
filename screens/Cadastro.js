@@ -8,11 +8,9 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { useUserContext } from "../contexts/UserContext";
 import { useForm, Controller } from "react-hook-form";
 
 const CadastroScreen = ({ navigation }) => {
-  const { setUser } = useUserContext();
   const {
     control,
     handleSubmit,
@@ -59,7 +57,7 @@ const CadastroScreen = ({ navigation }) => {
           backgroundColor: "#cceb9d",
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "flex-start",
           alignItems: "center",
           padding: 30,
           paddingLeft: 15,
@@ -90,12 +88,6 @@ const CadastroScreen = ({ navigation }) => {
             ></Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => alert("fazendo logout")}>
-          <Image
-            source={require("../assets/logout.png")}
-            style={{ width: 51, height: 51, marginRight: 15 }}
-          />
-        </TouchableOpacity>
       </View>
       <ScrollView>
         <View style={{ padding: 15 }}>

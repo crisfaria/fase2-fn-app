@@ -1,4 +1,3 @@
-import { useRef, useState } from "react";
 import {
   Text,
   View,
@@ -27,9 +26,9 @@ const LoginScreen = ({ navigation }) => {
   });
 
   const onSubmit = async (data) => {
-    const resultado = autenticaUsuario(data);
+    const resultado = await autenticaUsuario(data);
     if (resultado === true) {
-      // chamar função de login pra salvar o usuário no contexto
+      login({ email: data.email });
       navigation.navigate("Home");
     } else {
       alert("Credenciais de acesso inválidas.");

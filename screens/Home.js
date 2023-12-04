@@ -96,7 +96,12 @@ const HomeScreen = ({ navigation }) => {
             </Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => logout()}>
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+            navigation.navigate("Login");
+          }}
+        >
           <Image
             source={require("../assets/logout.png")}
             style={{ width: 51, height: 51, marginRight: 15 }}

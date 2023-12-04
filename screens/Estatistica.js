@@ -6,8 +6,11 @@ import {
   Pressable,
   TouchableOpacity,
 } from "react-native";
+import { useUserContext } from "../contexts/UserContext";
 
 const EstatisticaScreen = ({ navigation }) => {
+  const { getUser, logout } = useUserContext();
+  const user = getUser();
   return (
     <View
       style={{
@@ -49,12 +52,17 @@ const EstatisticaScreen = ({ navigation }) => {
             <Text style={{ fontWeight: "bold", fontSize: 21, marginLeft: 15 }}>
               ESTATÍSTICA
             </Text>
-            <Text
-              style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}
-            ></Text>
+            <Text style={{ fontWeight: "400", fontSize: 15, marginLeft: 15 }}>
+              {user?.email}
+            </Text>
           </View>
         </View>
-        <TouchableOpacity onPress={() => alert("fazendo logout")}>
+        <TouchableOpacity
+          onPress={() => {
+            logout();
+            navigation.navigate("Login");
+          }}
+        >
           <Image
             source={require("../assets/logout.png")}
             style={{ width: 51, height: 51, marginRight: 15 }}

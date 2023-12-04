@@ -1,14 +1,49 @@
+import { useRef, useState } from "react";
 import {
-  Image,
-  Pressable,
-  ScrollView,
   Text,
+  View,
+  Image,
+  ScrollView,
+  Pressable,
   TextInput,
   TouchableOpacity,
-  View,
 } from "react-native";
+import { useUserContext } from "../contexts/UserContext";
+import { useForm, Controller } from "react-hook-form";
 
 const CadastroScreen = ({ navigation }) => {
+  const { setUser } = useUserContext();
+  const {
+    control,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      nome: "",
+      email: "",
+      senha: "",
+      confirmacaoSenha: "",
+    },
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      const respostaDoBackend = await fetch("url do servidor/login", {
+        method: "POST",
+        body: data,
+      });
+
+      if (respostaDoBackend.status === 200) {
+        alert("ihuuuu deu bom, logou");
+      } else {
+        alert("Credenciais inválidas.");
+      }
+    } catch (e) {
+      alert("deu ruim pra valer.");
+    }
+  };
+
   return (
     <View
       style={{
@@ -57,18 +92,42 @@ const CadastroScreen = ({ navigation }) => {
             Nome Completo:
           </Text>
           <Pressable>
-            <TextInput
-              placeholder="Digite seu nome completo aqui"
-              keyboardType="default"
-              style={{
-                backgroundColor: "#ffffff",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
-
-                borderRadius: 15,
+            <Controller
+              control={control}
+              rules={{
+                required: true,
               }}
-            ></TextInput>
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  placeholder="Digite seu Nome"
+                  keyboardType="default"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    padding: 12,
+                    marginTop: 12,
+                    marginBottom: 12,
+
+                    borderRadius: 15,
+                  }}
+                ></TextInput>
+              )}
+              name="nome"
+            />
+            {errors.nome && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Campo de preenchimento obrigatório.
+              </Text>
+            )}
           </Pressable>
           <Text
             style={{
@@ -81,17 +140,42 @@ const CadastroScreen = ({ navigation }) => {
             Seu endereço de Email:
           </Text>
           <Pressable>
-            <TextInput
-              placeholder="Seu email"
-              keyboardType="email-address"
-              style={{
-                backgroundColor: "#ffffff",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
-                borderRadius: 15,
+            <Controller
+              control={control}
+              rules={{
+                required: true,
               }}
-            ></TextInput>
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  value={value}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  placeholder="Digite seu Email aqui"
+                  keyboardType="email-address"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    padding: 12,
+                    marginTop: 12,
+                    marginBottom: 12,
+
+                    borderRadius: 15,
+                  }}
+                ></TextInput>
+              )}
+              name="email"
+            />
+            {errors.email && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Campo de preenchimento obrigatório.
+              </Text>
+            )}
           </Pressable>
           <Text
             style={{
@@ -104,17 +188,56 @@ const CadastroScreen = ({ navigation }) => {
             Escolha uma Senha
           </Text>
           <Pressable>
-            <TextInput
-              placeholder="Senha, apenas números"
-              keyboardType="numeric"
-              style={{
-                backgroundColor: "#ffffff",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
-                borderRadius: 15,
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+                minLength: 6,
               }}
-            ></TextInput>
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  secureTextEntry={true}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Digite sua Senha aqui"
+                  keyboardType="numeric"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    padding: 12,
+                    marginTop: 12,
+                    marginBottom: 12,
+
+                    borderRadius: 15,
+                  }}
+                ></TextInput>
+              )}
+              name="senha"
+            />
+            {errors.senha?.type === "required" && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Campo de preenchimento obrigatório.
+              </Text>
+            )}
+            {errors.senha?.type === "minLength" && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Sua senha deve conter no mínimo 6 números.
+              </Text>
+            )}
           </Pressable>
           <Text
             style={{
@@ -127,20 +250,52 @@ const CadastroScreen = ({ navigation }) => {
             Confirme sua Senha
           </Text>
           <Pressable>
-            <TextInput
-              placeholder="Confirme sua Senha, apenas números"
-              keyboardType="numeric"
-              style={{
-                backgroundColor: "#ffffff",
-                padding: 12,
-                marginTop: 12,
-                marginBottom: 12,
-                borderRadius: 15,
+            <Controller
+              control={control}
+              rules={{
+                required: true,
+                minLength: 6,
+                validate: (val) => {
+                  if (watch("senha") != val) {
+                    return "Confirmação inválida";
+                  }
+                },
               }}
-            ></TextInput>
+              render={({ field: { onChange, onBlur, value } }) => (
+                <TextInput
+                  secureTextEntry={true}
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  placeholder="Confirme sua Senha"
+                  keyboardType="numeric"
+                  style={{
+                    backgroundColor: "#ffffff",
+                    padding: 12,
+                    marginTop: 12,
+                    marginBottom: 12,
+
+                    borderRadius: 15,
+                  }}
+                ></TextInput>
+              )}
+              name="confirmacaoSenha"
+            />
+            {errors.confirmacaoSenha && (
+              <Text
+                style={{
+                  color: "#cc0000",
+                  fontWeight: "bold",
+                  marginBottom: 12,
+                  marginLeft: 12,
+                }}
+              >
+                Confirmção de senha inválida
+              </Text>
+            )}
           </Pressable>
           <TouchableOpacity
-            onPress={() => navigation.navigate("Home")}
+            onPress={handleSubmit(onSubmit)}
             style={{
               backgroundColor: "#FFD14F",
               flex: 1,

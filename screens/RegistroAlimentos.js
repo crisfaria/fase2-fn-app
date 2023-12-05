@@ -16,7 +16,7 @@ import { useForm, Controller } from "react-hook-form";
 const RegistroAlimentosScreen = ({ navigation }) => {
   const { adicionarAlimento } = useAlimentosContext();
   const { getUser, logout } = useUserContext();
-  const user = getUser();
+  const user = getUser(); //Utilizando as informações de contexto de usuário
   const {
     control,
     handleSubmit,
@@ -27,13 +27,13 @@ const RegistroAlimentosScreen = ({ navigation }) => {
       nomeDoAlimento: "",
       qtdDoAlimento: "",
     },
-  });
+  });//função de tratamentos de erro, uso do contexto, e recebimento dos inputs do usuário
 
   const onSubmit = async (data) => {
     adicionarAlimento({ ...data, id: uuidv4() });
 
     navigation.navigate("Home");
-  };
+  };//função que recebe, identifica o input do usuário com um id para cada registro
 
   return (
     <View
@@ -123,7 +123,7 @@ const RegistroAlimentosScreen = ({ navigation }) => {
                   { label: "Almoço", value: "Almoço" },
                   { label: "Lanche", value: "Lanche" },
                   { label: "Jantar", value: "Jantar" },
-                ]}
+                ]}// valores das categorias de refeições possiveis de serem registradas
                 style={{
                   backgroundColor: "#ffffff",
                   padding: 12,
@@ -141,7 +141,7 @@ const RegistroAlimentosScreen = ({ navigation }) => {
                 fontWeight: "bold",
                 marginBottom: 12,
                 marginLeft: 12,
-              }}
+              }} //tratamento do erro caso o campo não seja preenchido
             >
               Campo de preenchimento obrigatório.
             </Text>
@@ -190,7 +190,7 @@ const RegistroAlimentosScreen = ({ navigation }) => {
                   fontWeight: "bold",
                   marginBottom: 12,
                   marginLeft: 12,
-                }}
+                }}//Campo de preenchimento obrigatório com o nome do alimento a ser registrado e tratamento de erro caso fique vazio
               >
                 Campo de preenchimento obrigatório.
               </Text>
@@ -257,7 +257,7 @@ const RegistroAlimentosScreen = ({ navigation }) => {
               marginLeft: 72,
               marginRight: 72,
               borderRadius: 15,
-            }}
+            }}//botão para salvar os inputs do usuário na lista de alimentos de acordo com a categoria escolhida
             title="Salvar"
           >
             <Text style={{ fontWeight: "bold", fontSize: 18 }}>Salvar</Text>

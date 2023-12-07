@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Image,
   FlatList,
+  ScrollView,
 } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import Carousel from "react-native-snap-carousel";
@@ -109,104 +110,122 @@ const HomeScreen = ({ navigation }) => {
           />
         </TouchableOpacity>
       </View>
-      <View style={styles.waterHistoryBox}>
-        <Text style={styles.waterHistoryTitle}>Histórico de Água</Text>
-        <FlatList
-          data={waterHistory}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.waterHistoryItem}>
-              <Text>{item.amount} ml</Text>
-              <TouchableOpacity onPress={() => removeWaterItem(item.id)}>
-                <Ionicons
-                  name="trash-bin"
-                  size={18}
-                  color="#000"
-                  style={styles.trashIcon}
-                />
-              </TouchableOpacity>
-            </View>
-          )}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
-        {/* Linha preta abaixo dos itens do histórico */}
-        <View style={styles.blackLine}></View>
-        {/* Total de água ingerido */}
-        <View style={styles.totalWaterContainer}>
-          <Text style={styles.totalWaterText}>
-            Total de Água: {calculateTotalWater()} ml
-          </Text>
-        </View>
-      </View>
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={[styles.button, { marginTop: 6 }]}
-          onPress={() => addToWaterHistory(1000)}
-        >
-          <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>1 L</Text>
-            <Ionicons name="water" size={30} color="#000" style={styles.icon} />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.button, { marginTop: 6 }]}
-          onPress={() => addToWaterHistory(500)}
-        >
-          <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>500 ml</Text>
-            <Ionicons name="water" size={30} color="#000" style={styles.icon} />
-          </View>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={[styles.button, { marginTop: 6 }]}
-          onPress={() => addToWaterHistory(200)}
-        >
-          <View style={styles.buttonContent}>
-            <Text style={styles.buttonText}>200 ml</Text>
-            <Ionicons name="water" size={30} color="#000" style={styles.icon} />
-          </View>
-        </TouchableOpacity>
-      </View>
-
-      <SafeAreaView style={{ marginTop: 20 }}>
-        <View style={styles.carouselContainer}>
-          <Carousel
-            data={data}
+      <ScrollView>
+        <View style={styles.waterHistoryBox}>
+          <Text style={styles.waterHistoryTitle}>Histórico de Água</Text>
+          <FlatList
+            data={waterHistory}
+            keyExtractor={(item) => item.id.toString()}
             renderItem={({ item }) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate(item.target)}
-              >
-                <View style={styles.carouselItem}>
-                  <Image source={item.image} style={styles.image} />
-                </View>
-              </TouchableOpacity>
+              <View style={styles.waterHistoryItem}>
+                <Text>{item.amount} ml</Text>
+                <TouchableOpacity onPress={() => removeWaterItem(item.id)}>
+                  <Ionicons
+                    name="trash-bin"
+                    size={18}
+                    color="#000"
+                    style={styles.trashIcon}
+                  />
+                </TouchableOpacity>
+              </View>
             )}
-            sliderWidth={400}
-            itemWidth={160}
+            horizontal
+            showsHorizontalScrollIndicator={false}
           />
+          {/* Linha preta abaixo dos itens do histórico */}
+          <View style={styles.blackLine}></View>
+          {/* Total de água ingerido */}
+          <View style={styles.totalWaterContainer}>
+            <Text style={styles.totalWaterText}>
+              Total de Água: {calculateTotalWater()} ml
+            </Text>
+          </View>
         </View>
-      </SafeAreaView>
 
-      <TouchableOpacity
-        style={[styles.addButton, { bottom: 30 }]} // Ajuste a propriedade bottom conforme necessário
-        onPress={handleAddMealPress}
-      >
-        <View style={styles.addButtonInner}>
-          <Icon name="add-circle" size={60} color="#000" />
-          <Text style={styles.addButtonText}>Adicionar Refeição</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 6 }]}
+            onPress={() => addToWaterHistory(1000)}
+          >
+            <View style={styles.buttonContent}>
+              <Text style={styles.buttonText}>1 L</Text>
+              <Ionicons
+                name="water"
+                size={30}
+                color="#000"
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 6 }]}
+            onPress={() => addToWaterHistory(500)}
+          >
+            <View style={styles.buttonContent}>
+              <Text style={styles.buttonText}>500 ml</Text>
+              <Ionicons
+                name="water"
+                size={30}
+                color="#000"
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 6 }]}
+            onPress={() => addToWaterHistory(200)}
+          >
+            <View style={styles.buttonContent}>
+              <Text style={styles.buttonText}>200 ml</Text>
+              <Ionicons
+                name="water"
+                size={30}
+                color="#000"
+                style={styles.icon}
+              />
+            </View>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
+
+        <SafeAreaView style={{ marginTop: 20 }}>
+          <View style={styles.carouselContainer}>
+            <Carousel
+              data={data}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(item.target)}
+                >
+                  <View style={styles.carouselItem}>
+                    <Image source={item.image} style={styles.image} />
+                  </View>
+                </TouchableOpacity>
+              )}
+              sliderWidth={400}
+              itemWidth={160}
+            />
+          </View>
+        </SafeAreaView>
+
+        <TouchableOpacity
+          style={[styles.addButton, { bottom: 30 }]} // Ajuste a propriedade bottom conforme necessário
+          onPress={handleAddMealPress}
+        >
+          <View style={styles.addButtonInner}>
+            <Icon name="add-circle" size={60} color="#000" />
+            <Text style={styles.addButtonText}>Adicionar Refeição</Text>
+          </View>
+        </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: "flex-end",
+    //justifyContent: "flex-end",
+    flexDirection: "column",
     flex: 1,
   },
   header: {
@@ -308,6 +327,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     borderWidth: 2,
     borderColor: "#000",
+    height: 270,
   },
   waterHistoryContainer: {
     marginVertical: 10,
